@@ -1,11 +1,11 @@
 {
   "homepage": "https://DaichiEvanijo.github.io/typescript-portfolio1/",
-  "name": "typescript-portfolio-1",
+  "name": "typescript-portfolio1",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy":"npm run dev",
+    "predeploy":"npm run build",
     "deploy":"gh-pages -d dist ",
     "dev": "vite",
     "build": "tsc && vite build",

@@ -98,7 +98,7 @@ type ProductsContextProviderProps = {children?:ReactElement|ReactElement[]}
 export const ProductsContextProvider = ({children}:ProductsContextProviderProps):ReactElement => {
   
 // 7
-const[products, setProducts] =useState<ProductType[]>(initState)
+const[products, _setProducts] =useState<ProductType[]>(initState)
 
 //   useEffect(() => {
 //    const fetchProducts = async () => {
