@@ -1,0 +1,162 @@
+@use "variables" as variables;
+@use "breakpoints" as breakpoints;
+@forward "global";
+
+
+// header
+
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    .icon {
+      color: variables.$themecolor;
+    }
+  }
+
+  nav {
+    ul {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+
+      .cartlogo {
+        position: relative;
+
+        span {
+          position: absolute;
+          top: -50%;
+          color: black;
+          border: 1px solid variables.$borderLineColor;
+          background-color: white;
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// ProductList
+
+
+
+.productlist {
+  .filterbuttonandsearchbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    .filterbutton {
+      display: flex;
+      flex-wrap: wrap;
+
+      button {
+        margin-right: 1rem;
+
+        @include breakpoints.maxwidth(594px) {
+          width: 6rem;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .searchbar input {
+      all: unset;
+      border: 1px solid variables.$borderLineColor;
+      border-radius: variables.$border-radius;
+      padding: 4px;
+      font-weight: normal;
+    }
+  }
+
+  .productmap {
+    ul {
+      @include variables.ulStyle();
+    }
+  }
+}
+
+
+.pagination {
+  text-align: center;
+  padding: 3rem 0;
+
+  button {
+    margin: 0 1rem;
+
+    .active {
+      color: variables.$borderLineColor;
+    }
+  }
+}
+
+
+
+
+// Cart
+
+
+
+.cart {
+  .orderConformation {
+    text-align: center;
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: 2rem ;
+  }
+
+  .ifNoproductIncart {
+    .linktoHomepage {
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    @include variables.ulStyle();
+
+    .itemquantity {
+      input {
+        all: unset;
+        background-color: variables.$borderLineColor;
+        border-radius: variables.$border-radius;
+        padding: 4px;
+        width: 5vw;
+      }
+    }
+  }
+}
+
+.orderSection {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid variables.$borderLineColor;
+
+  .cartTotals {
+    font-size: 1.25rem;
+  }
+}
+
+
+
+
+// Footer
+
+
+
+footer {
+  text-align: center;
+}

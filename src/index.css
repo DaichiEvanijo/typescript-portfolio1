@@ -1,0 +1,245 @@
+/* Alternative to SCSS */
+
+
+/* all */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+body{
+  font-family: sans-serif;
+}
+
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  transition: opacity 0.5s;
+}
+a:hover{
+  opacity: 0.5;
+}
+
+img{
+  vertical-align: bottom;
+  object-fit: cover;
+}
+
+h1{
+  font-size: calc(2rem);
+}
+h2{
+  font-size: calc(1.5rem+1vw);
+}
+h3{
+  font-size: calc(1.25rem+0.5vw);
+}
+p{
+  font-size: calc(1rem+0.25vw);
+}
+
+.container{
+  max-width: 1024px;
+  margin: 1rem auto;
+  padding: 0 1.25rem;
+}
+
+:root{
+  --themeColor:#85e3fd;
+  --borderLineColor:rgb(221, 221, 221);
+}
+
+button{
+  all:unset;
+  min-width: 1.5rem;
+  border: 1px solid var(--borderLineColor);
+  border-radius: 10px;
+  padding: 0.25rem;
+  color: black;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+button:hover{
+  opacity: 0.5;
+}
+
+
+
+/* Header */
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .icon{
+  color:var(--themeColor)
+}
+header nav ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+header nav ul .cartlogo{
+  position: relative;
+}
+header nav ul span{
+  position: absolute;
+  top: -50%;
+  color:black;
+  border: 1px solid var(--borderLineColor);
+  background-color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+
+
+/* ProductList */
+.productlist .filterbuttonandsearchbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.productlist .filterbutton {
+  display: flex;
+  flex-wrap: wrap;
+}
+.productlist .filterbutton button{
+  margin-right: 1rem;
+}
+/* media query */
+@media (max-width: 594px) {
+  .productlist .filterbutton button{
+    width: 6rem;
+    margin-bottom:10px;
+  }
+}
+.productlist .searchbar input{
+  all: unset;
+  border: 1px solid var(--borderLineColor);
+  border-radius: 10px;
+  padding: 4px;
+  font-weight: normal;
+}
+
+
+.productmap .ifnoproduct {
+  height: 75vh;
+}
+.productmap ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  height: 75vh;
+  overflow-y: auto;
+}
+.productmap ul li{
+  text-align: center;
+  margin: 5vh 0;
+  width: 50%;
+}
+.productmap ul li > * {
+  margin-bottom: 1.5rem;
+}
+.productmap ul li img {
+  width: 100%;
+}
+/* media query */
+@media(min-width:991px){
+  .productmap ul li{
+    width: 30%;
+  }
+}
+
+.pagination {
+  text-align: center;
+  padding: 1rem 0;
+}
+.pagination button{
+  margin: 0 1rem;
+}
+.pagination button.active{
+  color: var(--borderLineColor);
+}
+
+
+
+/* cart */
+.cart .orderConformation{
+  text-align: center;
+  height: 85vh;
+}
+.cart .title{
+  text-align: center;
+  margin:2rem 0;
+}
+.cart .ifNoproductIncart{
+  height: 75vh;
+}
+.cart .linktoHomepage{
+  text-decoration: underline;
+}
+/* 下の3つはproductmapと同じ */
+.cart ul {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  height: 70vh;
+  overflow-y: auto;
+}
+.cart ul li{
+  text-align: center;
+  margin: 1vh 0;
+  width: 50%;
+}
+.cart ul li > * {
+  margin-bottom: 1rem;
+}
+.cart ul li img{
+  width: 100%;
+}
+.cart ul li input{
+  all: unset;
+  background-color: var(--borderLineColor);
+  border-radius: 10px;
+  padding: 4px;
+  width: 5vw;
+}
+
+.cart .orderSection{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid var(--borderLineColor);
+}
+.cart .cartTotals{
+  font-size: 1.25rem;
+}
+/* media query */
+@media(min-width:991px){
+  .cart ul li{
+    width: 30%;
+  }
+}
+
+
+/* Footer */
+footer{
+  text-align: center;
+}
