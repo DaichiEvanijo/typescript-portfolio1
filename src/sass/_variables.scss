@@ -1,0 +1,43 @@
+@use "breakpoints" as breakpoints;
+
+
+// variables
+
+$themecolor: #85e3fd;
+$borderLineColor:rgb(221, 221, 221);
+// height of main section = ProductList and Cart component
+$height : 85vh;
+// border radius for button element and input
+$border-radius: 10px;
+
+
+
+
+// unorder list style for cart as well as product list 
+
+@mixin ulStyle {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+  height: $height - 20vh;
+  overflow-y: auto;
+
+  li{
+    text-align: center;
+    margin: 1vh 0;
+    width: 50%;
+
+    @include breakpoints.minwidth(991px){
+      width: 30%;
+    }
+
+    > * {
+      margin-bottom: 1rem;
+    }
+
+    img{
+      width: 90%;
+    }
+  }
+}
