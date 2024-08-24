@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-height {
+   height: calc(100vh - 128px);
+}
+/* the hight of body (header 72px footer 56px) */
