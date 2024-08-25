@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useState } from "react"
+import { ReactElement, useCallback, useMemo, useRef, useState } from "react"
 import Product from "./Product"
 import Pagination from "./Pagination"
 import useProducts from "../../hooks/useProducts"
@@ -15,9 +15,11 @@ const ProductList = () => {
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>(products)
   const [currentPage, setCurrentPage] = useState(1)
   const productsPerPage = 6
-  const lastProductIndex = currentPage * productsPerPage
-  const firstProductIndex = lastProductIndex - productsPerPage
-  const currentProducts = filteredProducts.slice(firstProductIndex, lastProductIndex)
+  const currentProducts = useMemo(() => {
+    const lastProductIndex = currentPage * productsPerPage
+    const firstProductIndex = lastProductIndex - productsPerPage
+    return filteredProducts.slice(firstProductIndex, lastProductIndex)
+  }, [filteredProducts, currentPage, productsPerPage])
   // the below state is only for filter button color
   const [selectedCategory, setSelectedCategory] = useState("All")
   const categories = ["Germany", "Thailand", "Japan", "All"]
@@ -34,8 +36,8 @@ const ProductList = () => {
     ) : (
       <ul className="flex flex-wrap justify-between items-center p-3">
         {currentProducts.map((product) => {
-          const getQuantityInCart = () => {
-            const item = orderedCart.find(item => item.id === product.id)
+          const getQuantityInCart = (productId:number) => {
+            const item = orderedCart.find(item => item.id === productId)
             return item && item.quantity > 0 ? `(${item.quantity})` : null
           }
           return (
@@ -44,7 +46,7 @@ const ProductList = () => {
               product={product}
               dispatch={dispatch}
               ReducerActionList={ReducerActionList}
-              getQuantityInCart={getQuantityInCart}
+              getQuantityInCart={() => getQuantityInCart(product.id)}
             />
           )
         })}
@@ -52,7 +54,7 @@ const ProductList = () => {
     )
   }
 
-  const performFiltering = () => {
+  const performFiltering = useCallback(() => {
     const searchfilteredProducts = products.filter((product) =>
       product.name.toLowerCase().includes(searchText.toLowerCase()) &&
      (selectedCategory==="All" || product.category === selectedCategory)
@@ -60,9 +62,9 @@ const ProductList = () => {
     setFilteredProducts(searchfilteredProducts)
     setSearchText("")
     setCurrentPage(1)
-  }
+  },[products, searchText,selectedCategory])
 
-  const buttonFilter = (category: string) => {
+  const buttonFilter = useCallback((category: string) => {
     if(category !== "All"){
       const buttonfilteredProducts = products.filter(product => 
         product.category === category &&
@@ -76,7 +78,7 @@ const ProductList = () => {
       setCurrentPage(1)
       setSelectedCategory(category)
     }
-  }
+  },[products, searchText])
 
   return (
     <main className="custom-height overflow-auto *:dark:text-white bg-white dark:bg-black font-bold py-3">

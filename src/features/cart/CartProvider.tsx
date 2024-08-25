@@ -1,4 +1,4 @@
-import { ReactElement, createContext, useEffect, useReducer } from "react";
+import { ReactElement, createContext, useEffect, useMemo, useReducer } from "react";
 import React from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -93,21 +93,21 @@ const reducer = (cart: cartItemType[], action:ReducerActionType): cartItemType[]
     const [storedCart, setStoredCart] = useLocalStorage("cart", initialCartState)
     const [cart, dispatch] = useReducer(reducer, storedCart)
     
-    const orderedCart = cart.sort((a,b) => {
+    const orderedCart = useMemo(() => cart.sort((a,b) => {
       const itemA = Number(a.id)
       const itemB = Number(b.id)
       return itemA-itemB
-    })
+    }),[cart])
     
     useEffect(() => {
       setStoredCart(orderedCart)
     }, [orderedCart])
   
-  const totalItems = cart.reduce((previousValue, cartItem) => {
+  const totalItems = useMemo(() => cart.reduce((previousValue, cartItem) => {
     return previousValue + cartItem.quantity
-  },0)
+  },0),[cart])
   
-  const totalPrice = (cart.reduce((previousValue, cartItem) => previousValue+cartItem.quantity*cartItem.price,0)).toString()
+  const totalPrice = useMemo(() => (cart.reduce((previousValue, cartItem) => previousValue+cartItem.quantity*cartItem.price,0)).toString(),[cart])
   
   
   return (
